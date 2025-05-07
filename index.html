@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tietovisapeli</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        text-align: center;
+      }
+      .question-container {
+        display: none;
+      }
+      .question {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+      .options {
+        list-style-type: none;
+        padding: 0;
+      }
+      .options li {
+        margin: 5px 0;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+      #result {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tervetuloa Tietovisapeliin ❗😵</h1>
+
+    <div id="question1" class="question-container">
+      <div class="question">1. Mikä on Suomen pääkaupunki?</div>
+      <ul class="options">
+        <li>
+          <input type="radio" id="q1a" name="q1" value="a" />
+          <label for="q1a">Helsinki</label>
+        </li>
+        <li>
+          <input type="radio" id="q1b" name="q1" value="b" />
+          <label for="q1b">Tampere</label>
+        </li>
+        <li>
+          <input type="radio" id="q1c" name="q1" value="c" />
+          <label for="q1c">Turku</label>
+        </li>
+        <li>
+          <input type="radio" id="q1d" name="q1" value="d" />
+          <label for="q1d">Oulu</label>
+        </li>
+      </ul>
+      <button onclick="nextQuestion(2)">Seuraava</button>
+    </div>
+
+    <div id="question2" class="question-container">
+      <div class="question">2. Minkä maan pääkaupunki on Pariisi?</div>
+      <ul class="options">
+        <li>
+          <input type="radio" id="q2a" name="q2" value="a" />
+          <label for="q2a">Espanja</label>
+        </li>
+        <li>
+          <input type="radio" id="q2b" name="q2" value="b" />
+          <label for="q2b">Ranska</label>
+        </li>
+        <li>
+          <input type="radio" id="q2c" name="q2" value="c" />
+          <label for="q2c">Italia</label>
+        </li>
+        <li>
+          <input type="radio" id="q2d" name="q2" value="d" />
+          <label for="q2d">Saksa</label>
+        </li>
+      </ul>
+      <button onclick="nextQuestion(3)">Seuraava</button>
+    </div>
+
+    <div id="question3" class="question-container">
+      <div class="question">3. Kuka kirjoitti näytelmän "Romeo ja Julia"?</div>
+      <ul class="options">
+        <li>
+          <input type="radio" id="q3a" name="q3" value="a" />
+          <label for="q3a">Mark Twain</label>
+        </li>
+        <li>
+          <input type="radio" id="q3b" name="q3" value="b" />
+          <label for="q3b">Charles Dickens</label>
+        </li>
+        <li>
+          <input type="radio" id="q3c" name="q3" value="c" />
+          <label for="q3c">Leo Tolstoi</label>
+        </li>
+        <li>
+          <input type="radio" id="q3d" name="q3" value="d" />
+          <label for="q3d">William Shakespeare</label>
+        </li>
+      </ul>
+      <button onclick="nextQuestion(4)">Seuraava</button>
+    </div>
+
+    <div id="question4" class="question-container">
+      <div class="question">4. Mikä on maailman korkein vuori?</div>
+      <ul class="options">
+        <li>
+          <input type="radio" id="q4a" name="q4" value="a" />
+          <label for="q4a">Mount Everest</label>
+        </li>
+        <li>
+          <input type="radio" id="q4b" name="q4" value="b" />
+          <label for="q4b">Kangchenjunga</label>
+        </li>
+        <li>
+          <input type="radio" id="q4c" name="q4" value="c" />
+          <label for="q4c">Mont Blanc</label>
+        </li>
+        <li>
+          <input type="radio" id="q4d" name="q4" value="d" />
+          <label for="q4d">Kilimanjaro</label>
+        </li>
+      </ul>
+      <button onclick="nextQuestion(5)">Seuraava</button>
+    </div>
+
+    <div id="question5" class="question-container">
+      <div class="question">
+        5. Kuka on suomalainen jääkiekkoilija, joka pelasi NHL:ssä ja voitti
+        useita mestaruuksia?
+      </div>
+      <ul class="options">
+        <li>
+          <input type="radio" id="q5a" name="q5" value="a" />
+          <label for="q5a">Jari Kurri</label>
+        </li>
+        <li>
+          <input type="radio" id="q5b" name="q5" value="b" />
+          <label for="q5b">Teemu Selänne</label>
+        </li>
+        <li>
+          <input type="radio" id="q5c" name="q5" value="c" />
+          <label for="q5c">Saku Koivu</label>
+        </li>
+        <li>
+          <input type="radio" id="q5d" name="q5" value="d" />
+          <label for="q5d">Esa Tikkanen</label>
+        </li>
+      </ul>
+      <button onclick="submitQuiz()">Lähetä vastaukset</button>
+    </div>
+
+    <div id="result">
+      <h2>Testisi tulos:</h2>
+      <p id="score"></p>
+      <button onclick="startOver()">Aloita alusta</button>
+    </div>
+
+    <script>
+      // Oikeat vastaukset (a = oikein)
+      const correctAnswers = {
+        q1: "a", // Helsinki
+        q2: "b", // Ranska
+        q3: "d", // William Shakespeare
+        q4: "a", // Mount Everest
+        q5: "b", // Teemu Selänne
+      };
+
+      let score = 0;
+      let currentQuestion = 1;
+
+      function showQuestion(questionNumber) {
+        // Piilota kaikki kysymykset
+        for (let i = 1; i <= 5; i++) {
+          document.getElementById(`question${i}`).style.display = "none";
+        }
+        // Näytä nykyinen kysymys
+        document.getElementById(`question${questionNumber}`).style.display =
+          "block";
+      }
+
+      function nextQuestion(nextQuestionNumber) {
+        // Tarkista nykyinen kysymys
+        const selectedAnswer = document.querySelector(
+          `input[name="q${currentQuestion}"]:checked`
+        );
+        if (
+          selectedAnswer &&
+          selectedAnswer.value === correctAnswers[`q${currentQuestion}`]
+        ) {
+          score++;
+        }
+
+        // Päivitä kysymys
+        currentQuestion = nextQuestionNumber;
+        showQuestion(currentQuestion);
+      }
+
+      function submitQuiz() {
+        // Tarkistetaan viimeinen kysymys
+        const selectedAnswer = document.querySelector(
+          `input[name="q${currentQuestion}"]:checked`
+        );
+        if (
+          selectedAnswer &&
+          selectedAnswer.value === correctAnswers[`q${currentQuestion}`]
+        ) {
+          score++;
+        }
+
+        // Näytetään tulos
+        document.getElementById("result").style.display = "block";
+        document.getElementById(
+          "score"
+        ).textContent = `Sait ${score} / 5 oikeaa!`;
+        document.getElementById("question5").style.display = "none";
+      }
+
+      function startOver() {
+        // Nollaa peli ja näytä ensimmäinen kysymys
+        score = 0;
+        currentQuestion = 1;
+        showQuestion(currentQuestion);
+        document.getElementById("result").style.display = "none";
+      }
+
+      // Aluksi näytetään ensimmäinen kysymys
+      showQuestion(currentQuestion);
+    </script>
+  </body>
+</html>
